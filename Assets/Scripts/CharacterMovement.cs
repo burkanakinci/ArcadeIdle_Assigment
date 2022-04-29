@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateTempVelocity()
     {
-        tempVelocity = new Vector3(joystick.Horizontal * movementMultiplier, 0.0f, joystick.Vertical * movementMultiplier);
+        tempVelocity = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical)*movementMultiplier;
 
         if(joystick.Horizontal!=0.0f||joystick.Vertical!=0.0f)
         {
@@ -35,7 +35,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateCharacterVelocity()
     {
-        characterRb.velocity = tempVelocity;
+        characterRb.velocity =  tempVelocity;
 
         if (characterRb.velocity != Vector3.zero & !characterAnimator.GetBool("IsWalking"))
         {

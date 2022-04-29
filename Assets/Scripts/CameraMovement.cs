@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] float lerpOnPlay = 0.15f;
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         MoveCamera();
     }
@@ -19,6 +19,6 @@ public class CameraMovement : MonoBehaviour
             player.position + offsetOnPlay,
             lerpOnPlay);
 
-        transform.LookAt(player);
+        //transform.LookAt(player);
     }
 }

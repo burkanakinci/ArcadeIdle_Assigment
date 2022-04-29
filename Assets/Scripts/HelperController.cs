@@ -88,8 +88,9 @@ public class HelperController : MonoBehaviour
 
     public Vector3 CalculateCubeTarget()
     {
-        return new Vector3(0.0f, (stackYCount * ObjectPool.Instance.GetCubeYScale()) + (stackYCount * helperData.stackOffset),
-            (-1f * stackZCount * ObjectPool.Instance.GetCubeZScale()) - (stackZCount * helperData.stackOffset));
+        return new Vector3(((stackZCount - 1) * ObjectPool.Instance.GetCubeXScale()) + ((stackZCount - 1) * helperData.stackOffset),
+            (stackYCount * ObjectPool.Instance.GetCubeYScale()) + (stackYCount * helperData.stackOffset),
+            0.0f);
     }
 
     public void ResetStackValues()
