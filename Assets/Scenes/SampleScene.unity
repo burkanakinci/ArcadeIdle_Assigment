@@ -552,7 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 314164930}
   - component: {fileID: 314164931}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 433163426}
   - component: {fileID: 433163427}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   m_Component:
   - component: {fileID: 450217716}
   - component: {fileID: 450217717}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2183,7 +2183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 941975642}
   - component: {fileID: 941975643}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2227,7 +2227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 949546482}
   - component: {fileID: 949546483}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2576,7 +2576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1017455563}
   - component: {fileID: 1017455564}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4068,7 +4068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1573133717}
   - component: {fileID: 1573133718}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4408,7 +4408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1698579321}
   - component: {fileID: 1698579322}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: ZoneLockedArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6068,7 +6068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2552014278326724652, guid: 088ceb17b838af240b41055970659c14, type: 3}
       propertyPath: m_Constraints
-      value: 80
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 2552014278326724654, guid: 088ceb17b838af240b41055970659c14, type: 3}
       propertyPath: joystick
@@ -6076,7 +6076,7 @@ PrefabInstance:
       objectReference: {fileID: 1141680903}
     - target: {fileID: 2552014278326724654, guid: 088ceb17b838af240b41055970659c14, type: 3}
       propertyPath: movementMultiplier
-      value: 11
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2552014278326724655, guid: 088ceb17b838af240b41055970659c14, type: 3}
       propertyPath: m_Material
