@@ -17,8 +17,8 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
-    public event Action levelStart;
-    private int level=0;
+    // public event Action levelStart;
+    // private int level=0;
 
     private void Awake()
     {
@@ -27,9 +27,5 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
-    public void UnlockZones()
-    {
-
-    }
 
 }

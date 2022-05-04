@@ -20,12 +20,6 @@ public class StateMachine : MonoBehaviour
             currentState.UpdateLogic();
     }
 
-    private void FixedUpdate()
-    {
-        if (currentState != null)
-            currentState.UpdatePhysics();
-    }
-
     public void ChangeState(BaseState nextState)
     {
         currentState.Exit();

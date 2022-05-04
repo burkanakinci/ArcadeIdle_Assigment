@@ -6,6 +6,7 @@ public class BaseState
 {
     public string name;
     protected StateMachine stateMachine;
+    
 
     public BaseState(string name, StateMachine stateMachine)
     {
@@ -19,10 +20,6 @@ public class BaseState
         return;
     }
     public virtual void UpdateLogic()
-    {
-        return;
-    }
-    public virtual void UpdatePhysics()
     {
         return;
     }

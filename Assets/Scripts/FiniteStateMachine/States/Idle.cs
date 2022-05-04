@@ -19,12 +19,4 @@ public class Idle : BaseState
         movementStateMachine.helperController.PlayIdleAnimation();
 
     }
-
-    public override void UpdateLogic()
-    {
-        if (movementStateMachine.HasTargetCube())
-        {
-            movementStateMachine.ChangeState(movementStateMachine.movingState);
-        }
-    }
 }

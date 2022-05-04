@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Moving : BaseState
 {
-   
     private MovementStateMachine movementStateMachine;
 
     public Moving(MovementStateMachine stateMachine) : base("Moving", stateMachine)
@@ -37,11 +36,5 @@ public class Moving : BaseState
         {
             movementStateMachine.ChangeState(movementStateMachine.idleState);
         }
-    }
-    public override void UpdatePhysics()
-    {
-        //Debug.Log("MovingUpdateLogic");
-        movementStateMachine.rigidbodyHelper.velocity =
-                movementStateMachine.tempVelocity*movementStateMachine.moveSpeed;
     }
 }

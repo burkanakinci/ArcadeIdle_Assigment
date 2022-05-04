@@ -9,11 +9,11 @@ public class CharacterMovement : MonoBehaviour
     private Rigidbody characterRb;
     private Animator characterAnimator;
     private Vector3 tempVelocity;
-
     private void Start()
     {
         characterRb = GetComponent<Rigidbody>();
         characterAnimator = GetComponent<Animator>();
+        
     }
 
     private void Update()

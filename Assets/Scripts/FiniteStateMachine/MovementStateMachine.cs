@@ -6,11 +6,8 @@ public class MovementStateMachine : StateMachine
 {
     public HelperController helperController;
     [HideInInspector] public Vector3 tempVelocity;
-    [SerializeField] private float speed=5f;
-
     [HideInInspector] public Moving movingState;
     [HideInInspector] public Idle idleState;
-    [HideInInspector] public MovingStorage movingStorageState;
 
     public Rigidbody rigidbodyHelper;
     public float moveSpeed = 5f;
