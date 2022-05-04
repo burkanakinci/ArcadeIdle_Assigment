@@ -20,7 +20,7 @@ public class CharacterManager : MonoBehaviour
     private List<CubeController> collectedCubes = new List<CubeController>();
     private CubeController tempCube;
     [SerializeField] private Transform collectedCubeParent;
-    private int stackYCount, stackZCount;
+    private int stackYMultiplier, stackXMultiplier;
     [SerializeField] private float stackOffset = 0.5f;
     private void Awake()
     {
@@ -31,8 +31,7 @@ public class CharacterManager : MonoBehaviour
     {
         UIController.Instance.SetStackCountText(collectedCubes.Count);
 
-        stackYCount = 0;
-        stackZCount = -1;
+        ResetStackValues();
     }
 
     public void AddCollectedCube(CubeController _cube)
@@ -41,25 +40,20 @@ public class CharacterManager : MonoBehaviour
         _cube.transform.parent = collectedCubeParent;
         _cube.gameObject.layer = 7;
 
-        stackZCount++;
-
         UIController.Instance.SetStackCountText(collectedCubes.Count);
     }
 
     public Vector3 CalculateCubeTarget()
     {
-        return new Vector3(((stackZCount-1) * ObjectPool.Instance.GetCubeXScale()) +((stackZCount-1) * stackOffset),
-            (stackYCount * ObjectPool.Instance.GetCubeYScale()) + (stackYCount * stackOffset),
-            0.0f);
+        return new Vector3(((stackXMultiplier) * ObjectPool.Instance.GetCubeXScale()) + ((stackXMultiplier) * stackOffset),
+            (stackYMultiplier * ObjectPool.Instance.GetCubeYScale()) + (stackYMultiplier * stackOffset),
+            0.0f) + (Vector3.right * (ObjectPool.Instance.GetCubeXScale() + stackOffset));
     }
 
     public void ResetStackValues()
     {
-        if (collectedCubes.Count % 3 == 0)
-        {
-            stackYCount++;
-            stackZCount = -1;
-        }
+        stackYMultiplier = (collectedCubes.Count - 1) / 3;
+        stackXMultiplier = (collectedCubes.Count % 3) - 2;
     }
 
     public void DecreaseCube(ref Transform _droppedPoint)
@@ -68,10 +62,9 @@ public class CharacterManager : MonoBehaviour
         tempCube = collectedCubes[collectedCubes.Count - 1];
         collectedCubes.Remove(tempCube);
         tempCube.transform.SetParent(_droppedPoint);
-        tempCube.DropCube();
+        tempCube.DropCube(true, Vector3.zero);
 
-        stackYCount = collectedCubes.Count / 3;
-        stackZCount = (collectedCubes.Count % 3) - 1;
+        ResetStackValues();
 
         UIController.Instance.SetStackCountText(collectedCubes.Count);
 

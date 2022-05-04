@@ -5,14 +5,6 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     private BaseState currentState;
-    private void Start()
-    {
-        currentState = GetInitialState();
-        if(currentState!=null)
-        {
-            currentState.Enter();
-        }
-    }
 
     private void Update()
     {
@@ -22,7 +14,11 @@ public class StateMachine : MonoBehaviour
 
     public void ChangeState(BaseState nextState)
     {
-        currentState.Exit();
+
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
 
         currentState = nextState;
         currentState.Enter();
@@ -31,5 +27,9 @@ public class StateMachine : MonoBehaviour
     protected virtual BaseState GetInitialState()
     {
         return null;
+    }
+    public BaseState GetCurrentState()
+    {
+        return currentState;
     }
 }

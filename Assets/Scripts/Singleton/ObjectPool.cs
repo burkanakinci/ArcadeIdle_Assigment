@@ -60,12 +60,9 @@ public class ObjectPool : MonoBehaviour
         if (helperPool.Count > 0)
         {
             tempHelper = helperPool[0];
-            tempHelper.SetTargetCubes(_cubeArea.GetCubes());
             tempHelper.gameObject.SetActive(true);
 
             tempHelper.transform.position = _spawnPos;
-
-            tempHelper.movementStateMachine.ChangeState(tempHelper.movementStateMachine.movingState);
 
             collactableCubePool.Remove(tempCube);
 

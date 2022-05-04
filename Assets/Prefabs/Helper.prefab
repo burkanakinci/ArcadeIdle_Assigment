@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 5616517347483575762}
   - component: {fileID: 5616517347483575761}
   - component: {fileID: 5616517347483575766}
+  - component: {fileID: 3611326364737310889}
   - component: {fileID: 4697405133093040869}
   - component: {fileID: 699257749}
   m_Layer: 10
@@ -471,6 +472,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!195 &3611326364737310889
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697405133093040868}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!114 &4697405133093040869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helperController: {fileID: 699257749}
   tempVelocity: {x: 0, y: 0, z: 0}
-  speed: 5
   rigidbodyHelper: {fileID: 5616517347483575762}
   moveSpeed: 5
 --- !u!114 &699257749
@@ -506,6 +528,7 @@ MonoBehaviour:
   targetCubes: []
   collectedCubes: []
   collectedCubeParent: {fileID: 7970091174649753656}
+  helperNavMesh: {fileID: 3611326364737310889}
 --- !u!1 &4802485873166884588
 GameObject:
   m_ObjectHideFlags: 0

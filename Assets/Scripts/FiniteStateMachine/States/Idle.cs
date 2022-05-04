@@ -15,8 +15,16 @@ public class Idle : BaseState
     public override void Enter()
     {
         //base.Enter();
-        //Debug.Log("MovingEnter");
+        //Debug.Log("IdleEnter");
         movementStateMachine.helperController.PlayIdleAnimation();
 
     }
+
+    // public override void UpdateLogic()
+    // {
+    //     if (movementStateMachine.HasTargetCube())
+    //     {
+    //         movementStateMachine.ChangeState(movementStateMachine.movingState);
+    //     }
+    // }
 }

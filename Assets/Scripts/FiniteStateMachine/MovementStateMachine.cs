@@ -8,8 +8,6 @@ public class MovementStateMachine : StateMachine
     [HideInInspector] public Vector3 tempVelocity;
     [HideInInspector] public Moving movingState;
     [HideInInspector] public Idle idleState;
-
-    public Rigidbody rigidbodyHelper;
     public float moveSpeed = 5f;
 
     private void Awake()
@@ -22,13 +20,9 @@ public class MovementStateMachine : StateMachine
     {
         return idleState;
     }
-    public void SetTargetVelocity()
-    {
-        tempVelocity = Vector3.Normalize((helperController.GetLastCubePos()- transform.position));
-    }
     public bool HasCollectedCube()
     {
-        if(helperController.GetCollectedCubeCount()>0)
+        if (helperController.GetCollectedCubeCount() > 0)
         {
             return true;
         }
@@ -36,10 +30,15 @@ public class MovementStateMachine : StateMachine
     }
     public bool HasTargetCube()
     {
-        if(helperController.GetTargetCubeCount() > 0)
+        if (helperController.GetTargetCubeCount() > 0)
         {
             return true;
         }
         return false;
+    }
+
+    public void SetTarget()
+    {
+        helperController.SetNavMeshTarget();
     }
 }
