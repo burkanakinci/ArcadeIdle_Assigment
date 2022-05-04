@@ -9,6 +9,7 @@ public class CubeController : MonoBehaviour
     private Vector3 tempSpawnPos;
     private CubeAreaController parentCubeArea;
     private bool jumpOnZone;
+    private ZoneController zoneController;
 
     public IEnumerator SpawnCube()
     {
@@ -22,9 +23,17 @@ public class CubeController : MonoBehaviour
                 CharacterManager.Instance.GetCollectedCubeCount() < 30)
         {
             tempSpawnPos = transform.position;
-
             //SpawnCube
-            StartCoroutine(SpawnCube());
+            if (!StorageManager.Instance.IsOnStorage(this))
+            {
+
+                StartCoroutine(SpawnCube());
+            }
+            else
+            {
+                StorageManager.Instance.DecreaseStorageCube(this);
+                StorageManager.Instance.AddStorageCollectedPos(tempSpawnPos);
+            }
 
             //AddList
             CharacterManager.Instance.AddCollectedCube(this);
@@ -36,9 +45,9 @@ public class CubeController : MonoBehaviour
             CubeAreaManager.Instance.DecreaseCubeOnCubeArea(this);
         }
     }
-    public void DropCube(bool _onZone, Vector3 _target)
+    public void DropCube(ZoneController _zone, Vector3 _target)
     {
-        jumpOnZone = _onZone;
+        zoneController = _zone;
 
         transform.DOLocalRotate(Vector3.zero, cubeData.cubeJumpDuration);
         transform.DOLocalJump(_target, cubeData.cubeJumpPower, 1, cubeData.cubeJumpDuration)
@@ -46,14 +55,23 @@ public class CubeController : MonoBehaviour
     }
     private IEnumerator DropComplete()
     {
-        transform.DOPunchScale(transform.localScale * (cubeData.cubePunchScaleMultiplier), cubeData.cubePunchScaleDuration, 0, 0.0f);
+
+        if (zoneController == null)
+        {
+            transform.DOPunchScale(transform.localScale * (cubeData.cubePunchScaleMultiplier), cubeData.cubePunchScaleDuration, 0, 0.0f);
+        }
+        else
+        {
+            zoneController.SetUnlockText();
+        }
         yield return new WaitForSeconds(cubeData.cubePunchScaleDuration);
-        this.gameObject.layer = 6;
-        if (jumpOnZone)
+
+        if (zoneController != null)
         {
             ObjectPool.Instance.ClearCollectableCube(this);
         }
 
+        this.gameObject.layer = 6;
     }
     public void SetParentCubeArea(CubeAreaController _cubeArea)
     {

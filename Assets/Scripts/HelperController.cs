@@ -123,7 +123,7 @@ public class HelperController : MonoBehaviour
         tempCube.transform.SetParent(StorageManager.Instance.storageCubeParent);
         StorageManager.Instance.AddStorageCube(tempCube);
 
-        tempCube.DropCube(false, StorageManager.Instance.GetCubeTargetPos());
+        tempCube.DropCube(null, StorageManager.Instance.GetCubeTargetPos());
 
         ResetStackValues();
 

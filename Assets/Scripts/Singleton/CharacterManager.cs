@@ -56,13 +56,13 @@ public class CharacterManager : MonoBehaviour
         stackXMultiplier = (collectedCubes.Count % 3) - 2;
     }
 
-    public void DecreaseCube(ref Transform _droppedPoint)
+    public void DecreaseCube(ref Transform _droppedPoint, ZoneController _zone)
     {
 
         tempCube = collectedCubes[collectedCubes.Count - 1];
         collectedCubes.Remove(tempCube);
         tempCube.transform.SetParent(_droppedPoint);
-        tempCube.DropCube(true, Vector3.zero);
+        tempCube.DropCube(_zone, Vector3.zero);
 
         ResetStackValues();
 

@@ -763,6 +763,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 369141060}
   lockedAreaCollider: {fileID: 314164931}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 1464885477}
 --- !u!65 &326522116
 BoxCollider:
@@ -868,6 +869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storageCubeParent: {fileID: 1525739862}
   storageDroppedArea: {fileID: 924360567}
+  storageCollectedPoses: []
   storageCounterText: {fileID: 1642981027}
   storageData: {fileID: 11400000, guid: a9d036603fcd8ce49b83eb7808be95fc, type: 2}
 --- !u!1 &419604635
@@ -1054,6 +1056,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 1913130926}
   lockedAreaCollider: {fileID: 450217717}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 744664304}
 --- !u!65 &510929107
 BoxCollider:
@@ -1927,6 +1930,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 529596936}
   lockedAreaCollider: {fileID: 1698579322}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 1948512380}
 --- !u!65 &818452154
 BoxCollider:
@@ -3157,6 +3161,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 1534555939}
   lockedAreaCollider: {fileID: 1017455564}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 1568188812}
 --- !u!65 &1126739815
 BoxCollider:
@@ -3219,6 +3224,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 633872717}
   lockedAreaCollider: {fileID: 433163427}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 2140082785}
 --- !u!65 &1140363171
 BoxCollider:
@@ -5297,6 +5303,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 1928172122}
   lockedAreaCollider: {fileID: 949546483}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 2076029127}
 --- !u!1 &1795440914
 GameObject:
@@ -5490,6 +5497,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 988954450}
   lockedAreaCollider: {fileID: 1573133718}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 1213019187}
 --- !u!65 &1861822405
 BoxCollider:
@@ -5646,6 +5654,7 @@ MonoBehaviour:
   droppedCubePoint: {fileID: 873210358}
   lockedAreaCollider: {fileID: 941975643}
   tempCount: 0
+  showCount: 0
   zoneUnlockText: {fileID: 915628665}
 --- !u!1 &1913130925
 GameObject:

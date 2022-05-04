@@ -54,9 +54,9 @@ public class CharacterMovement : MonoBehaviour
     {
         lookPos = characterRb.velocity;
         lookPos.y = 0;
-        rotation = Quaternion.LookRotation(lookPos);
-        if (rotation.eulerAngles != Vector3.zero)
+        if (lookPos != Vector3.zero)
         {
+            rotation = Quaternion.LookRotation(lookPos);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationLerpValue);
         }
 

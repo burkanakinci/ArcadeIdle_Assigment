@@ -8,48 +8,46 @@ public class ZoneController : MonoBehaviour
     [SerializeField] private ZoneData zoneData;
     [SerializeField] private Transform droppedCubePoint;
     [SerializeField] private BoxCollider lockedAreaCollider;
-    [SerializeField]private int tempCount;
+    [SerializeField] private int tempCount, showCount;
     private CubeAreaController tempCubeArea;
-
-
     private float timer;
 
-    [SerializeField]private TextMeshPro zoneUnlockText;
+    [SerializeField] private TextMeshPro zoneUnlockText;
 
     private void Start()
     {
         zoneUnlockText.text = "?";
-        if(GetZoneId()==0)
+        if (GetZoneId() == 0)
         {
-            
+
             CanDropped();
         }
+        ResetZoneValue();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            
-            if (GetIsLockZone() || CharacterManager.Instance.GetCollectedCubeCount() < 1||
-                tempCount>= zoneData.zoneUnlockAmount)
+
+            if (GetIsLockZone() || CharacterManager.Instance.GetCollectedCubeCount() < 1 ||
+                tempCount >= zoneData.zoneUnlockAmount)
                 return;
 
 
-            if (timer < zoneData.dropCubeRate)  
+            if (timer < zoneData.dropCubeRate)
             {
                 timer += Time.deltaTime;
                 return;
             }
 
-            CharacterManager.Instance.DecreaseCube(ref droppedCubePoint);
+            CharacterManager.Instance.DecreaseCube(ref droppedCubePoint, this);
 
             tempCount++;
-            SetUnlockText();
 
             timer = 0.0f;
 
-            if (tempCount>=zoneData.zoneUnlockAmount)
+            if (tempCount >= zoneData.zoneUnlockAmount)
             {
 
                 DropCompleted();
@@ -63,13 +61,13 @@ public class ZoneController : MonoBehaviour
 
         if (GetZoneId() == 0)
             ZoneAreaManager.Instance.UnlockZones();
-        else if(GetZoneId() == 2|| GetZoneId() == 4|| GetZoneId() ==6)
+        else if (GetZoneId() == 2 || GetZoneId() == 4 || GetZoneId() == 6)
         {
 
             //Helper üret ve helper'a hedefini söyle
             ResetZoneValue();
             tempCubeArea = CubeAreaManager.Instance.UnlockCubeAreas(this);
-            ObjectPool.Instance.SpawnHelper((transform.position+Vector3.up*2f),tempCubeArea);
+            ObjectPool.Instance.SpawnHelper((transform.position + Vector3.up * 2f), tempCubeArea);
         }
 
         lockedAreaCollider.enabled = false;
@@ -77,6 +75,7 @@ public class ZoneController : MonoBehaviour
     private void ResetZoneValue()
     {
         tempCount = 0;
+        showCount = 0;
     }
 
     public void CanDropped()
@@ -92,7 +91,8 @@ public class ZoneController : MonoBehaviour
     }
     public void SetUnlockText()
     {
-        zoneUnlockText.text = (zoneData.zoneUnlockAmount-tempCount).ToString();
+        showCount++;
+        zoneUnlockText.text = (zoneData.zoneUnlockAmount - showCount).ToString();
     }
 
     public bool GetIsLockZone()

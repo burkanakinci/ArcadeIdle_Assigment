@@ -32,11 +32,17 @@ public class CubeAreaManager : MonoBehaviour
     {
         for (int i = cubeAreas.Length - 1; i >= 0; i--)
         {
-            if ((_zone.GetZoneId()-1) ==(cubeAreas[i].GetCubeAreaId()))
+            if ((_zone.GetZoneId() % 3) == (cubeAreas[i].GetCubeAreaId()))
 
             {
-                cubeAreas[i].SetCubeAreaIsLock(false);
-                cubeAreas[i].FillCubeArea();
+
+
+                if (cubeAreas[i].GetCubeAreaIsLock())
+                {
+                    cubeAreas[i].SetCubeAreaIsLock(false);
+                    cubeAreas[i].FillCubeArea();
+                }
+
                 return cubeAreas[i];
             }
         }
@@ -44,7 +50,7 @@ public class CubeAreaManager : MonoBehaviour
     }
     public void DecreaseCubeOnCubeArea(CubeController _cube)
     {
-        
+
         for (int i = cubeAreas.Length - 1; i >= 0; i--)
         {
             if (cubeAreas[i].GetCubes().Contains(_cube))
