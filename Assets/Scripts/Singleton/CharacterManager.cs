@@ -22,6 +22,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private Transform collectedCubeParent;
     private int stackYMultiplier, stackXMultiplier;
     [SerializeField] private float stackOffset = 0.5f;
+    [SerializeField] private CharacterMovement characterMovement;
     private void Awake()
     {
         instance = this;
@@ -29,7 +30,7 @@ public class CharacterManager : MonoBehaviour
 
     private void Start()
     {
-        UIController.Instance.SetStackCountText(collectedCubes.Count);
+        UIController.Instance.SetStackCountText();
 
         ResetStackValues();
     }
@@ -40,7 +41,7 @@ public class CharacterManager : MonoBehaviour
         _cube.transform.parent = collectedCubeParent;
         _cube.gameObject.layer = 7;
 
-        UIController.Instance.SetStackCountText(collectedCubes.Count);
+        UIController.Instance.SetStackCountText();
     }
 
     public Vector3 CalculateCubeTarget()
@@ -66,12 +67,24 @@ public class CharacterManager : MonoBehaviour
 
         ResetStackValues();
 
-        UIController.Instance.SetStackCountText(collectedCubes.Count);
+        UIController.Instance.SetStackCountText();
 
     }
 
     public int GetCollectedCubeCount()
     {
         return collectedCubes.Count;
+    }
+    public void SpeedUp()
+    {
+        characterMovement.characterData.movementMultiplier += (characterMovement.characterData.movementMultiplier * 0.2f);
+    }
+    public void CapacityUp()
+    {
+        characterMovement.characterData.characterCapacity += 5;
+    }
+    public int GetCapacity()
+    {
+        return characterMovement.characterData.characterCapacity;
     }
 }

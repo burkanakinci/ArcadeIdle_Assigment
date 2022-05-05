@@ -22,5 +22,20 @@ public class ZoneData : ScriptableObject
 
         set => PlayerPrefs.SetInt("IsLockedZone" + zoneId, value ? 1 : 0);
     }
-    
+    public bool IsCompleted
+    {
+        get
+        {
+            if (!PlayerPrefs.HasKey("IsCompleted" + zoneId))
+            {
+                PlayerPrefs.SetInt("IsCompleted" + zoneId, 0);
+            }
+
+            return PlayerPrefs.GetInt("IsCompleted" + zoneId) == 1;
+
+        }
+
+        set => PlayerPrefs.SetInt("IsCompleted" + zoneId, value ? 1 : 0);
+    }
+
 }

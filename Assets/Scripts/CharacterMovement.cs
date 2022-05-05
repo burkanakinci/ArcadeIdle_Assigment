@@ -5,18 +5,12 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick joystick;
-    [SerializeField] private float movementMultiplier = 10f, rotationLerpValue = 6f;
-    private Rigidbody characterRb;
-    private Animator characterAnimator;
+    public CharacterData characterData;
+    [SerializeField]private Rigidbody characterRb;
+    [SerializeField]private Animator characterAnimator;
     private Vector3 tempVelocity;
     private Vector3 lookPos;
     private Quaternion rotation;
-    private void Start()
-    {
-        characterRb = GetComponent<Rigidbody>();
-        characterAnimator = GetComponent<Animator>();
-
-    }
 
     private void Update()
     {
@@ -29,7 +23,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateTempVelocity()
     {
-        tempVelocity = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical) * movementMultiplier;
+        tempVelocity = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical) * characterData.movementMultiplier;
 
         // if (joystick.Horizontal != 0.0f || joystick.Vertical != 0.0f)
         // {
@@ -57,9 +51,8 @@ public class CharacterMovement : MonoBehaviour
         if (lookPos != Vector3.zero)
         {
             rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotationLerpValue);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * characterData.rotationLerpValue);
         }
 
     }
-
 }

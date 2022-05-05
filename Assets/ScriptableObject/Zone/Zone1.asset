@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zoneId: 1
   zoneUnlockAmount: 20
-  dropCubeRate: 0.1
+  dropCubeRate: 0.15

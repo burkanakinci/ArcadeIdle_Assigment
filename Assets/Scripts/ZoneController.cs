@@ -8,21 +8,22 @@ public class ZoneController : MonoBehaviour
     [SerializeField] private ZoneData zoneData;
     [SerializeField] private Transform droppedCubePoint;
     [SerializeField] private BoxCollider lockedAreaCollider;
-    [SerializeField] private int tempCount, showCount;
-    private CubeAreaController tempCubeArea;
+    private int tempCount, showCount;
+    public IZoneAction zoneAction;
     private float timer;
 
     [SerializeField] private TextMeshPro zoneUnlockText;
 
     private void Start()
     {
+        zoneAction = GetComponent<IZoneAction>();
+
         zoneUnlockText.text = "?";
+        ResetZoneValue();
         if (GetZoneId() == 0)
         {
-
             CanDropped();
         }
-        ResetZoneValue();
     }
 
     private void OnTriggerStay(Collider other)
@@ -50,32 +51,19 @@ public class ZoneController : MonoBehaviour
             if (tempCount >= zoneData.zoneUnlockAmount)
             {
 
-                DropCompleted();
+                lockedAreaCollider.enabled = false;
 
+                SetIsCompletedZone(true);
+
+                zoneAction.ZoneAction();
             }
         }
     }
 
-    private void DropCompleted()
-    {
-
-        if (GetZoneId() == 0)
-            ZoneAreaManager.Instance.UnlockZones();
-        else if (GetZoneId() == 2 || GetZoneId() == 4 || GetZoneId() == 6)
-        {
-
-            //Helper üret ve helper'a hedefini söyle
-            ResetZoneValue();
-            tempCubeArea = CubeAreaManager.Instance.UnlockCubeAreas(this);
-            ObjectPool.Instance.SpawnHelper((transform.position + Vector3.up * 2f), tempCubeArea);
-        }
-
-        lockedAreaCollider.enabled = false;
-    }
     private void ResetZoneValue()
     {
         tempCount = 0;
-        showCount = 0;
+        showCount = -1;
     }
 
     public void CanDropped()
@@ -102,6 +90,14 @@ public class ZoneController : MonoBehaviour
     public void SetIsLockZone(bool _isLock)
     {
         zoneData.IsLocked = _isLock;
+    }
+    public bool GetIsCompletedZone()
+    {
+        return zoneData.IsCompleted;
+    }
+    public void SetIsCompletedZone(bool _isComplete)
+    {
+        zoneData.IsCompleted = _isComplete;
     }
     public int GetZoneId()
     {

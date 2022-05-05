@@ -25,8 +25,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI stackCountText;
 
-    public void SetStackCountText(int _count)
+    public void SetStackCountText()
     {
-        stackCountText.text = "Stack : "+_count;
+        stackCountText.text = CharacterManager.Instance.GetCollectedCubeCount() + " / " + CharacterManager.Instance.GetCapacity();
     }
 }

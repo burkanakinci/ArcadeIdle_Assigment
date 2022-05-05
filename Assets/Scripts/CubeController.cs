@@ -20,7 +20,7 @@ public class CubeController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") &&
-                CharacterManager.Instance.GetCollectedCubeCount() < 30)
+                CharacterManager.Instance.GetCollectedCubeCount() < CharacterManager.Instance.GetCapacity())
         {
             tempSpawnPos = transform.position;
             //SpawnCube
@@ -68,6 +68,7 @@ public class CubeController : MonoBehaviour
 
         if (zoneController != null)
         {
+
             ObjectPool.Instance.ClearCollectableCube(this);
         }
 
