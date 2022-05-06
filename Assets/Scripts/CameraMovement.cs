@@ -6,10 +6,12 @@ public class CameraMovement : MonoBehaviour
 {
     [SerializeField] private Vector3 offsetOnPlay;
     [SerializeField] private Transform player;
-    [SerializeField] float lerpOnPlay = 0.15f;
-    
+    [SerializeField] float lerpOnPlay = 2f;
+    private Vector3 lookPos;
+    private Quaternion rotation;
 
-    private void FixedUpdate()
+
+    private void LateUpdate()
     {
         MoveCamera();
     }
@@ -18,6 +20,6 @@ public class CameraMovement : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position,
             player.position + offsetOnPlay,
-            lerpOnPlay);
+            Time.deltaTime * lerpOnPlay);
     }
 }

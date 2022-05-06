@@ -6,11 +6,12 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private FloatingJoystick joystick;
     public CharacterData characterData;
-    [SerializeField]private Rigidbody characterRb;
-    [SerializeField]private Animator characterAnimator;
+    [SerializeField] private Rigidbody characterRb;
+    [SerializeField] private Animator characterAnimator;
     private Vector3 tempVelocity;
     private Vector3 lookPos;
     private Quaternion rotation;
+    [SerializeField] private ParticleSystem characterWalkParticle;
 
     private void Update()
     {
@@ -37,10 +38,14 @@ public class CharacterMovement : MonoBehaviour
         if (characterRb.velocity != Vector3.zero & !characterAnimator.GetBool("IsWalking"))
         {
             characterAnimator.SetBool("IsWalking", true);
+
+            characterWalkParticle.Play();
         }
         else if (characterRb.velocity == Vector3.zero & characterAnimator.GetBool("IsWalking"))
         {
             characterAnimator.SetBool("IsWalking", false);
+
+            characterWalkParticle.Stop();
         }
     }
 

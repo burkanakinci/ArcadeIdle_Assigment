@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 
-
 public class ZoneController : MonoBehaviour
 {
     [SerializeField] private ZoneData zoneData;
@@ -11,18 +10,30 @@ public class ZoneController : MonoBehaviour
     private int tempCount, showCount;
     public IZoneAction zoneAction;
     private float timer;
-
+    [SerializeField] private ParticleSystem zoneAreaParticle;
     [SerializeField] private TextMeshPro zoneUnlockText;
+    [SerializeField] private SpriteRenderer zoneIcon;
+    public Sprite checkIcon;
 
     private void Start()
     {
         zoneAction = GetComponent<IZoneAction>();
 
         zoneUnlockText.text = "?";
+        zoneIcon.sprite = null;
+
         ResetZoneValue();
         if (GetZoneId() == 0)
         {
+            SetIsLockZone(false);
+        }
+        if (!GetIsLockZone())
+        {
             CanDropped();
+        }
+        if (GetIsCompletedZone())
+        {
+            ZoneCompleted();
         }
     }
 
@@ -31,7 +42,7 @@ public class ZoneController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            if (GetIsLockZone() || CharacterManager.Instance.GetCollectedCubeCount() < 1 ||
+            if (GetIsCompletedZone() || GetIsLockZone() || CharacterManager.Instance.GetCollectedCubeCount() < 1 ||
                 tempCount >= zoneData.zoneUnlockAmount)
                 return;
 
@@ -50,14 +61,21 @@ public class ZoneController : MonoBehaviour
 
             if (tempCount >= zoneData.zoneUnlockAmount)
             {
+                ZoneCompleted();
 
-                lockedAreaCollider.enabled = false;
-
-                SetIsCompletedZone(true);
-
-                zoneAction.ZoneAction();
+                zoneAreaParticle.Play();
             }
         }
+    }
+    private void ZoneCompleted()
+    {
+        lockedAreaCollider.enabled = false;
+
+        SetIsCompletedZone(true);
+
+        zoneAction.ZoneAction();
+
+        zoneIcon.sprite = checkIcon;
     }
 
     private void ResetZoneValue()
@@ -76,6 +94,9 @@ public class ZoneController : MonoBehaviour
         SetIsLockZone(false);
 
         SetUnlockText();
+
+        zoneIcon.sprite = zoneAction.GetUnlockedIcon();
+
     }
     public void SetUnlockText()
     {

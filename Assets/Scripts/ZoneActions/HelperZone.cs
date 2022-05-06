@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
 public class HelperZone : MonoBehaviour, IZoneAction
 {
+    public Sprite unlockedIcon;
     private CubeAreaController tempCubeArea;
     private ZoneController zoneController;
     [SerializeField] private Transform zoneArea;
@@ -21,5 +22,9 @@ public class HelperZone : MonoBehaviour, IZoneAction
             0.8f,
             0,
             0.0f);
+    }
+    public Sprite GetUnlockedIcon()
+    {
+        return unlockedIcon;
     }
 }
