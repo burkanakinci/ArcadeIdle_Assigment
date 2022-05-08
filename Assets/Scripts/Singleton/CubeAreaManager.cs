@@ -30,19 +30,16 @@ public class CubeAreaManager : MonoBehaviour
 
     public CubeAreaController UnlockCubeAreas(ZoneController _zone)
     {
+        //Debug.Log(_zone);
         for (int i = cubeAreas.Length - 1; i >= 0; i--)
         {
             if ((_zone.GetZoneId() % 3) == (cubeAreas[i].GetCubeAreaId()))
-
             {
-
-
                 if (cubeAreas[i].GetCubeAreaIsLock())
                 {
                     cubeAreas[i].SetCubeAreaIsLock(false);
                     cubeAreas[i].FillCubeArea();
                 }
-
                 return cubeAreas[i];
             }
         }

@@ -14,7 +14,7 @@ public class CubeController : MonoBehaviour
     public IEnumerator SpawnCube()
     {
         yield return new WaitForSeconds(cubeData.cubeSpawnRate);
-        //ObjectSpawn on ObjectPool
+
         ObjectPool.Instance.SpawnCollactableCube(tempSpawnPos, parentCubeArea);
     }
     private void OnTriggerEnter(Collider other)
@@ -37,9 +37,8 @@ public class CubeController : MonoBehaviour
 
             //AddList
             CharacterManager.Instance.AddCollectedCube(this);
-
-            //Jump cube
             CharacterManager.Instance.ResetStackValues();
+            //Jump cube
             transform.DOLocalJump(CharacterManager.Instance.CalculateCubeTarget(), cubeData.cubeJumpPower, 1, cubeData.cubeJumpDuration);
             transform.DOLocalRotate(Vector3.zero, cubeData.cubeJumpDuration);
             CubeAreaManager.Instance.DecreaseCubeOnCubeArea(this);
@@ -56,19 +55,21 @@ public class CubeController : MonoBehaviour
     private IEnumerator DropComplete()
     {
 
-        if (zoneController == null)
+        if (zoneController != null)
         {
-            transform.DOPunchScale(transform.localScale * (cubeData.cubePunchScaleMultiplier), cubeData.cubePunchScaleDuration, 0, 0.0f);
+            zoneController.SetUnlockText();
+            zoneController.IsCompleted();
         }
         else
         {
-            zoneController.SetUnlockText();
+            transform.DOPunchScale(transform.localScale * (cubeData.cubePunchScaleMultiplier),
+                cubeData.cubePunchScaleDuration,
+                0,
+                0.0f);
         }
         yield return new WaitForSeconds(cubeData.cubePunchScaleDuration);
-
         if (zoneController != null)
         {
-
             ObjectPool.Instance.ClearCollectableCube(this);
         }
 

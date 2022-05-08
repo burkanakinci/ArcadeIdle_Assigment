@@ -14,7 +14,7 @@ public class Moving : BaseState
     public override void Enter()
     {
         //base.Enter();
-       
+
         movementStateMachine.helperController.PlayWalkAnimation();
 
         movementStateMachine.SetTarget();

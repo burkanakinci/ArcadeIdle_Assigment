@@ -9,7 +9,9 @@ public class StateMachine : MonoBehaviour
     private void Update()
     {
         if (currentState != null)
+        {
             currentState.UpdateLogic();
+        }
     }
 
     public void ChangeState(BaseState nextState)

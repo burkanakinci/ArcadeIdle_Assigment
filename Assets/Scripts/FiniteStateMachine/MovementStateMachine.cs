@@ -8,7 +8,7 @@ public class MovementStateMachine : StateMachine
     [HideInInspector] public Vector3 tempVelocity;
     [HideInInspector] public Moving movingState;
     [HideInInspector] public Idle idleState;
-    public float moveSpeed = 5f;
+    //public float moveSpeed = 5f;
 
     private void Awake()
     {
@@ -19,22 +19,6 @@ public class MovementStateMachine : StateMachine
     protected override BaseState GetInitialState()
     {
         return idleState;
-    }
-    public bool HasCollectedCube()
-    {
-        if (helperController.GetCollectedCubeCount() > 0)
-        {
-            return true;
-        }
-        return false;
-    }
-    public bool HasTargetCube()
-    {
-        if (helperController.GetTargetCubeCount() > 0)
-        {
-            return true;
-        }
-        return false;
     }
 
     public void SetTarget()

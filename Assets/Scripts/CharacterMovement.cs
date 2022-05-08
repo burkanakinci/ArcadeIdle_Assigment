@@ -12,6 +12,15 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 lookPos;
     private Quaternion rotation;
     [SerializeField] private ParticleSystem characterWalkParticle;
+    [HideInInspector] public int capacity = 10;
+    [HideInInspector] public float moveMultiplier = 5f;
+
+    private void Awake()
+    {
+        capacity = characterData.characterCapacity;
+        moveMultiplier = characterData.movementMultiplier;
+    }
+
 
     private void Update()
     {
@@ -24,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
     }
     private void UpdateTempVelocity()
     {
-        tempVelocity = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical) * characterData.movementMultiplier;
+        tempVelocity = new Vector3(joystick.Horizontal, 0.0f, joystick.Vertical) * moveMultiplier;
 
         // if (joystick.Horizontal != 0.0f || joystick.Vertical != 0.0f)
         // {

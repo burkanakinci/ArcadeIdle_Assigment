@@ -77,14 +77,15 @@ public class CharacterManager : MonoBehaviour
     }
     public void SpeedUp()
     {
-        characterMovement.characterData.movementMultiplier += (characterMovement.characterData.movementMultiplier * 0.2f);
+        characterMovement.moveMultiplier += (characterMovement.moveMultiplier * 0.2f);
     }
     public void CapacityUp()
     {
-        characterMovement.characterData.characterCapacity += 5;
+        characterMovement.capacity += 5;
+        UIController.Instance.SetStackCountText();
     }
     public int GetCapacity()
     {
-        return characterMovement.characterData.characterCapacity;
+        return characterMovement.capacity;
     }
 }

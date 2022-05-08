@@ -15,7 +15,7 @@ public class ZoneController : MonoBehaviour
     [SerializeField] private SpriteRenderer zoneIcon;
     public Sprite checkIcon;
 
-    private void Start()
+    private void OnEnable()
     {
         zoneAction = GetComponent<IZoneAction>();
 
@@ -27,13 +27,13 @@ public class ZoneController : MonoBehaviour
         {
             SetIsLockZone(false);
         }
-        if (!GetIsLockZone())
-        {
-            CanDropped();
-        }
         if (GetIsCompletedZone())
         {
             ZoneCompleted();
+        }
+        else if (!GetIsLockZone())
+        {
+            CanDropped();
         }
     }
 
@@ -44,7 +44,9 @@ public class ZoneController : MonoBehaviour
 
             if (GetIsCompletedZone() || GetIsLockZone() || CharacterManager.Instance.GetCollectedCubeCount() < 1 ||
                 tempCount >= zoneData.zoneUnlockAmount)
+            {
                 return;
+            }
 
 
             if (timer < zoneData.dropCubeRate)
@@ -58,13 +60,6 @@ public class ZoneController : MonoBehaviour
             tempCount++;
 
             timer = 0.0f;
-
-            if (tempCount >= zoneData.zoneUnlockAmount)
-            {
-                ZoneCompleted();
-
-                zoneAreaParticle.Play();
-            }
         }
     }
     private void ZoneCompleted()
@@ -76,6 +71,18 @@ public class ZoneController : MonoBehaviour
         zoneAction.ZoneAction();
 
         zoneIcon.sprite = checkIcon;
+
+        showCount = (zoneData.zoneUnlockAmount - 1);
+        SetUnlockText();
+    }
+    public void IsCompleted()
+    {
+        if (tempCount >= zoneData.zoneUnlockAmount &&
+            (zoneData.zoneUnlockAmount - showCount) == 0)
+        {
+            ZoneCompleted();
+            zoneAreaParticle.Play();
+        }
     }
 
     private void ResetZoneValue()

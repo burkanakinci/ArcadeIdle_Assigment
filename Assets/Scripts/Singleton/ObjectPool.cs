@@ -22,7 +22,7 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] private List<HelperController> helperPool = new List<HelperController>();
     [SerializeField] private HelperController helperPrefab;
-    private HelperController tempHelper ;
+    private HelperController tempHelper;
 
     private void Awake()
     {
@@ -48,14 +48,14 @@ public class ObjectPool : MonoBehaviour
             return;
         }
 
-            collactableCubePrefab.gameObject.layer = 6;
-            tempCube= Instantiate(collactableCubePrefab, _spawnPos, Quaternion.identity, _parentCubeArea.GetCubeAreaCubesParent());
+        collactableCubePrefab.gameObject.layer = 6;
+        tempCube = Instantiate(collactableCubePrefab, _spawnPos, Quaternion.identity, _parentCubeArea.GetCubeAreaCubesParent());
         tempCube.SetParentCubeArea(_parentCubeArea);
 
         _parentCubeArea.AddCubeList(tempCube);
-       
+
     }
-    public void SpawnHelper(Vector3 _spawnPos,CubeAreaController _cubeArea)
+    public void SpawnHelper(Vector3 _spawnPos, CubeAreaController _cubeArea)
     {
         if (helperPool.Count > 0)
         {

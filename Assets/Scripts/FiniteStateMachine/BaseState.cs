@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseState 
+public class BaseState
 {
     public string name;
     protected StateMachine stateMachine;
-    
+
 
     public BaseState(string name, StateMachine stateMachine)
     {

@@ -10,9 +10,7 @@ public class HelperController : MonoBehaviour
     public MovementStateMachine movementStateMachine;
     [SerializeField] private Animator helperAnimator;
     [SerializeField] private HelperData helperData;
-
     private int stackYMultiplier, stackXMultiplier;
-
     [SerializeField] private List<CubeController> targetCubes = new List<CubeController>();
     [SerializeField] private List<CubeController> collectedCubes = new List<CubeController>();
     [SerializeField] private Transform collectedCubeParent;
@@ -69,9 +67,13 @@ public class HelperController : MonoBehaviour
                 }
             }
         }
-        else if (other.CompareTag("Storage"))
+        else if (other.CompareTag("Storage") && GetCollectedCubeCount() >= 10)
         {
             timer = 0.0f;
+
+            helperNavMesh.SetDestination(transform.position);
+
+            movementStateMachine.ChangeState(movementStateMachine.idleState);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -95,6 +97,7 @@ public class HelperController : MonoBehaviour
             timer = 0.0f;
         }
     }
+
     public void AddCollectedCube(CubeController _cube)
     {
         collectedCubes.Add(_cube);
@@ -130,7 +133,7 @@ public class HelperController : MonoBehaviour
 
         if (collectedCubes.Count == 0)
         {
-            SetNavMeshTarget();
+            movementStateMachine.ChangeState(movementStateMachine.movingState);
         }
 
     }
@@ -156,7 +159,14 @@ public class HelperController : MonoBehaviour
 
     public void SetNavMeshTarget()
     {
-        helperNavMesh.SetDestination(targetCubes[0].transform.position);
+        try
+        {
+            helperNavMesh.SetDestination(targetCubes[0].transform.position);
+        }
+        catch
+        {
+            SetNavMeshTarget();
+        }
     }
 
 }
